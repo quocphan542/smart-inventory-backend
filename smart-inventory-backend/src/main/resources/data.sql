@@ -1,0 +1,1 @@
+-- File removed to prevent overwriting existing SQL Server data

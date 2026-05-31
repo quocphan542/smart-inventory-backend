@@ -23,10 +23,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-/**
- * Cấu hình bảo mật cho ứng dụng (Spring Security).
- * Định nghĩa các quy tắc phân quyền (RBAC) và quản lý JWT Filter.
- */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -60,22 +56,22 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // 1. API Public (Không cần đăng nhập)
+                        // 1. API Public
                         .requestMatchers("/api/auth/**", "/api/debug/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         
-                        // 2. API Dashboard
+                        // 2. API cho Dashboard (Admin và Thủ kho đều được xem)
                         .requestMatchers(HttpMethod.GET, "/api/dashboard/**").hasAnyAuthority("ROLE_Admin", "ROLE_Thủ kho")
 
-                        // 3. API Tác vụ Kho (CRUD cho Nhập/Xuất/Kiểm kê)
+                        // 3. API CRUD cho Thủ kho (và Admin cũng có quyền này)
                         .requestMatchers("/api/receipts/**", "/api/issues/**", "/api/adjustments/**").hasAnyAuthority("ROLE_Admin", "ROLE_Thủ kho")
                         
-                        // 4. API Tra cứu dữ liệu nguồn (Read-Only)
+                        // FIX: Cấp quyền GET cho Thủ kho để lấy dữ liệu cho các dropdown
                         .requestMatchers(HttpMethod.GET, "/api/inventory-stocks/**", "/api/products/**", "/api/suppliers/**", "/api/customers/**", "/api/warehouses/**", "/api/units/**", "/api/unit-conversions/**", "/api/warehouse-locations/**", "/api/categories/**").hasAnyAuthority("ROLE_Admin", "ROLE_Thủ kho")
 
-                        // 5. API cho Bán hàng (Chỉ được xem sản phẩm)
+                        // 4. API cho User (Bán hàng) - Giả sử họ chỉ được xem
                         .requestMatchers(HttpMethod.GET, "/api/products").hasAuthority("ROLE_User")
 
-                        // 6. Các API còn lại (Quản trị hệ thống) chỉ dành cho Admin
+                        // 5. API chỉ dành cho Admin (các API còn lại)
                         .requestMatchers("/api/**").hasAuthority("ROLE_Admin")
                         
                         .anyRequest().authenticated()
