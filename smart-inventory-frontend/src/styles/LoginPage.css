@@ -1,0 +1,256 @@
+/* === "Industrial Realism 2.0" Login Page Styles === */
+
+:root {
+    --bg-chassis: #e0e5ec;
+    --shadow-light: #ffffff;
+    --shadow-dark: #babecc;
+    --accent-orange: #ff4757;
+    --accent-green: #22c55e;
+    --crt-bg: #1a1c1e;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* --- Keyframes for Animations --- */
+@keyframes backgroundGrid {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 40px; }
+}
+
+@keyframes pulse-glow-orange {
+    0%, 100% { box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light), 0 0 10px var(--accent-orange); }
+    50% { box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light), 0 0 20px var(--accent-orange), 0 0 5px var(--accent-orange); }
+}
+
+@keyframes pulse-loading {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.login-chassis {
+    background-color: #d1d8e0; /* Slightly darker background */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Background Enhancements --- */
+.login-chassis::before { /* Central radial glow */
+    content: '';
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+}
+.login-chassis::after { /* Animated grid */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(186, 190, 204, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(186, 190, 204, 0.4) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: backgroundGrid 4s linear infinite;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* --- Logo Container --- */
+.logo-container {
+    margin-bottom: 2rem;
+    z-index: 1;
+}
+.logo-container img {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(5px 5px 10px var(--shadow-dark));
+}
+
+.auth-module {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem;
+    border-radius: 24px;
+    background: var(--bg-chassis);
+    box-shadow: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light);
+    z-index: 1;
+}
+
+/* --- Hardware Details --- */
+.corner-bolt {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--shadow-light), #a0a5b0);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.corner-bolt.top-left { top: 20px; left: 20px; }
+.corner-bolt.top-right { top: 20px; right: 20px; }
+.corner-bolt.bottom-left { bottom: 20px; left: 20px; }
+.corner-bolt.bottom-right { bottom: 20px; right: 20px; }
+
+/* --- LCD Header --- */
+.lcd-header {
+    background: var(--crt-bg);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: inset 4px 4px 8px rgba(0,0,0,0.8);
+    position: relative;
+    overflow: hidden;
+}
+.lcd-text {
+    font-family: var(--font-mono);
+    font-size: 1rem; /* Adjusted for subtitle */
+    font-weight: 700;
+    color: var(--accent-green);
+    text-shadow: 0 0 5px var(--accent-green), 0 0 10px var(--accent-green);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- Input Wells --- */
+.input-well-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+.input-well {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    background: var(--bg-chassis);
+    box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: #3d445c;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.input-focus-led {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #caced4;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.input-well:focus + .input-focus-led {
+    background: var(--accent-orange);
+    box-shadow: 0 0 10px var(--accent-orange);
+}
+
+/* --- Password Toggle Switch --- */
+.password-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+}
+.toggle-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-chassis);
+    box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+    border-radius: 12px;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+input:checked + .slider {
+    background-color: var(--accent-orange);
+    box-shadow: none;
+}
+input:checked + .slider:before {
+    transform: translateX(20px);
+    box-shadow: none;
+}
+
+/* --- Primary Button --- */
+.auth-button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: white;
+    background: var(--accent-orange);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Breathing Glow Animation */
+    animation: pulse-glow-orange 2.5s infinite;
+}
+.auth-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    animation-play-state: paused; /* Pause breathing on hover for direct interaction */
+    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light), 0 0 25px var(--accent-orange);
+}
+.auth-button:active {
+    transform: translateY(2px);
+    box-shadow: inset 4px 4px 8px #c13a45, inset -4px -4px 8px #ff5569;
+    filter: brightness(1);
+    animation: none;
+}
+.auth-button.loading {
+    animation: pulse-loading 1s infinite;
+}
+.auth-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    animation: none;
+    box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+}
+
+.error-message {
+    font-family: var(--font-mono);
+    color: var(--accent-orange);
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}

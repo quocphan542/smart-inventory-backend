@@ -1,0 +1,169 @@
+/* === Design System: Industrial Skeuomorphism - Operator Dashboard === */
+/* File: src/styles/ThuKhoDashboard.css */
+
+:root {
+    /* 1. Design Tokens */
+    --bg-chassis: #e0e5ec;
+    --text-primary: #2d3436;
+    --text-muted: #4a5568;
+    --accent-green: #22c55e;
+    --accent-orange: #ff4757;
+    --accent-amber: #f59e0b;
+    --lcd-screen-bg: #1a1c1e;
+    --border-shadow: #babecc;
+    --border-highlight: #ffffff;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+
+    /* 2. Neumorphic Shadows */
+    --shadow-heavy: 12px 12px 24px var(--border-shadow), -12px -12px 24px var(--border-highlight);
+    --shadow-recessed: inset 6px 6px 12px var(--border-shadow), inset -6px -6px 12px var(--border-highlight);
+    --shadow-pressed: inset 10px 10px 20px var(--border-shadow), inset -10px -10px 20px var(--border-highlight);
+}
+
+/* --- Base Layout & Ambiance --- */
+.ops-deck-container {
+    background-color: var(--bg-chassis);
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    padding: 1rem; /* p-4 */
+    min-height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDI1Ii8+PC9zdmc+');
+}
+
+/* --- Operator Header --- */
+.operator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    background: var(--bg-chassis);
+    box-shadow: var(--shadow-heavy);
+}
+.operator-id, .local-time {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+.logout-trigger {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 150ms ease-in-out;
+}
+.logout-trigger:hover {
+    color: var(--accent-orange);
+}
+.logout-trigger:active {
+    transform: translateY(2px);
+}
+
+/* --- Main Layout Grid (Responsive) --- */
+.dashboard-main-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile-first */
+    gap: 1.5rem;
+}
+@media (min-width: 1024px) {
+    .dashboard-main-grid {
+        grid-template-columns: 2fr 1fr; /* 2/3 for actions, 1/3 for telemetry */
+    }
+}
+
+/* --- Routing Matrix (The 4 Pillars) --- */
+.routing-matrix {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile-first */
+    gap: 1.5rem;
+}
+@media (min-width: 768px) {
+    .routing-matrix {
+        grid-template-columns: 1fr 1fr; /* 2x2 on tablet and up */
+    }
+}
+
+.module-launch-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 180px;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: var(--bg-chassis);
+    box-shadow: var(--shadow-heavy);
+    border: none;
+    cursor: pointer;
+    transition: all 100ms ease-in-out;
+}
+.module-launch-button:active {
+    box-shadow: var(--shadow-pressed);
+    transform: translateY(4px);
+}
+.launch-button-icon {
+    color: var(--text-primary);
+}
+.launch-button-label {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* --- Telemetry LCD Screen --- */
+.telemetry-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.telemetry-lcd {
+    flex-grow: 1;
+    background: var(--lcd-screen-bg);
+    box-shadow: var(--shadow-recessed);
+    border-radius: 16px;
+    padding: 1.5rem;
+    color: var(--accent-green);
+    font-family: var(--font-mono);
+}
+.telemetry-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 5px var(--accent-green);
+}
+.alert-line {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+}
+.alert-line.amber { color: var(--accent-amber); }
+.alert-line.red { color: var(--accent-orange); }
+
+/* --- Hardware Label --- */
+.hardware-label {
+    background: var(--bg-chassis);
+    box-shadow: var(--shadow-heavy);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}

@@ -1,0 +1,481 @@
+:root {
+    --bg-chassis: #e0e5ec;
+    --shadow-light: #ffffff;
+    --shadow-dark: #babecc;
+    --accent-orange: #ff4757;
+    --text-primary: #3d445c;
+    --text-secondary: #828a9a;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --blueprint-bg: #1a2938;
+    --blueprint-grid: rgba(74, 144, 226, 0.2);
+    --blueprint-text: #4a90e2;
+}
+
+.warehouse-chassis {
+    background-color: var(--bg-chassis);
+    background-image: url('data:image/svg+xml,%3Csvg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23babecc" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M5 0h1L0 6V5zM6 5v1H5z"/%3E%3C/g%3E%3C/svg%3E');
+    padding: 2rem;
+    font-family: var(--font-body);
+    min-height: 100%;
+}
+
+.console-title-stamp {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+
+.warehouse-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+@media (min-width: 1024px) {
+    .warehouse-layout-grid {
+        grid-template-columns: 400px 1fr;
+    }
+}
+
+/* --- Common Panel Styles --- */
+.control-board-panel, .coordinate-system-panel {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: var(--bg-chassis);
+    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+}
+
+.rivet {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--shadow-light), var(--shadow-dark));
+}
+.rivet:nth-of-type(1) { top: 12px; left: 12px; }
+.rivet:nth-of-type(2) { top: 12px; right: 12px; }
+.rivet:nth-of-type(3) { bottom: 12px; left: 12px; }
+.rivet:nth-of-type(4) { bottom: 12px; right: 12px; }
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--shadow-dark);
+}
+.panel-icon { color: var(--text-secondary); }
+.panel-title-stamp {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+/* --- Warehouse Modules --- */
+.warehouse-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+.warehouse-module {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 12px;
+    background: var(--bg-chassis);
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+.warehouse-module:hover {
+    box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+}
+.warehouse-module.selected {
+    border-color: var(--accent-orange);
+    box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
+}
+.module-vents {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-right: 1rem;
+}
+.vent-slot {
+    width: 6px;
+    height: 12px;
+    border-radius: 3px;
+    background: #caced4;
+    box-shadow: inset 1px 1px 2px var(--shadow-dark), inset -1px -1px 2px var(--shadow-light);
+}
+.wh-info { flex-grow: 1; }
+.wh-id-stamp {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+.wh-name {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.wh-address {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+.wh-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+.toggle-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+/* --- Tactical Toggle --- */
+.tactical-toggle {
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: var(--bg-chassis);
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+    position: relative;
+    transition: all 0.3s ease;
+}
+.toggle-nub {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg-chassis);
+    box-shadow: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    transition: all 0.3s ease;
+}
+.tactical-toggle.active {
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light), 0 0 0 1px var(--accent-orange);
+}
+.tactical-toggle.active .toggle-nub {
+    transform: translateX(18px);
+    background: var(--accent-orange);
+    box-shadow: 1px 1px 3px #d62535, -1px -1px 3px #ff697b;
+}
+
+/* --- Provisioning Panel --- */
+.coordinate-system-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.provisioning-well {
+    background: var(--bg-chassis);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+.provisioning-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 1rem;
+    align-items: end;
+}
+.input-group-recessed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.input-group-recessed label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+/* THAY ĐỔI: Sử dụng class chung cho input có shadow lõm nhưng BỎ uppercase mặc định */
+.input-group-recessed input,
+.form-group.input-group-recessed input {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--bg-chassis);
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    outline: none;
+}
+.input-group-recessed input:focus,
+.form-group.input-group-recessed input:focus {
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light), 0 0 0 2px var(--accent-orange);
+}
+.input-group-recessed input:disabled,
+.form-group.input-group-recessed input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Thêm class này dành riêng cho những input BẮT BUỘC viết hoa (như Zone, Shelf, Bin) */
+.input-uppercase {
+    text-transform: uppercase;
+}
+
+
+.tactical-btn-accent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 42px; /* Match input height roughly */
+    padding: 0 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: var(--accent-orange);
+    color: var(--shadow-light);
+    box-shadow: 4px 4px 10px #d62535, -4px -4px 10px #ff697b;
+    transition: all 0.1s ease-in-out;
+}
+.tactical-btn-accent:active:not(:disabled) {
+    box-shadow: inset 3px 3px 6px #d62535, inset -3px -3px 6px #ff697b;
+    transform: translateY(2px);
+}
+.tactical-btn-accent:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* THÊM: Nút Sửa Kho ở Branch Control Board */
+.edit-wh-btn {
+    margin-top: 5px;
+    padding: 2px;
+    background: transparent;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.edit-wh-btn:hover {
+    color: #2563eb;
+    transform: scale(1.1);
+}
+
+/* --- Blueprint Grid (REDESIGNED) --- */
+.blueprint-well {
+    flex-grow: 1;
+    background: var(--blueprint-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    overflow-y: auto;
+    min-height: 400px;
+    background-image:
+        linear-gradient(var(--blueprint-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--blueprint-grid) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+.blueprint-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--blueprint-text);
+    border-bottom: 1px solid var(--blueprint-grid);
+    padding-bottom: 0.5rem;
+}
+.blueprint-title {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.grid-floor-map {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Redesigned Grid Slot */
+.grid-slot {
+    width: 220px; /* To hơn để chứa description và các nút */
+    background: #2a3b4c;
+    border: 1px solid var(--blueprint-text);
+    border-radius: 6px;
+    padding: 0.75rem 0.75rem 1rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+    cursor: default;
+}
+.grid-slot:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.4);
+}
+
+.slot-actions {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.grid-slot:hover .slot-actions {
+    opacity: 1;
+}
+
+.slot-action-btn {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.slot-action-btn.edit {
+    color: #3b82f6; /* Xanh dương */
+}
+.slot-action-btn.edit:hover { background: rgba(59, 130, 246, 0.2); }
+
+.slot-action-btn.delete {
+    color: #ef4444; /* Đỏ */
+}
+.slot-action-btn.delete:hover { background: rgba(239, 68, 68, 0.2); }
+
+
+.slot-led {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #555;
+}
+
+.slot-coordinates {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--shadow-light);
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+.coord-divider { color: var(--blueprint-text); opacity: 0.5; }
+
+.slot-status-stamp {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+    align-self: center;
+    margin-bottom: 0.5rem;
+}
+
+.slot-desc-stamp {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-align: center;
+
+    /* white-space: nowrap; --> Xóa để nó có thể rớt dòng */
+    /* overflow: hidden; --> Xóa */
+    /* text-overflow: ellipsis; --> Xóa */
+
+    word-break: break-word; /* Ép rớt dòng nếu một từ quá dài */
+    width: 100%;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Status Variations */
+.grid-slot.status-empty {
+    border-color: #4b5563;
+}
+.grid-slot.status-empty .slot-status-stamp {
+    background: #374151;
+    color: #9ca3af;
+}
+
+.grid-slot.status-occupied {
+    border-color: var(--accent-orange);
+    background: rgba(255, 71, 87, 0.1);
+    box-shadow: 0 0 10px 2px rgba(255, 71, 87, 0.4); /* Glowing effect */
+}
+.grid-slot.status-occupied .slot-led {
+    background: var(--accent-orange);
+    box-shadow: 0 0 5px var(--accent-orange);
+}
+.grid-slot.status-occupied .slot-status-stamp {
+    background: var(--accent-orange);
+    color: var(--shadow-light);
+}
+
+.grid-slot.status-maintenance {
+    border-color: #eab308;
+    background: rgba(234, 179, 8, 0.1);
+}
+.grid-slot.status-maintenance .slot-led {
+    background: #eab308;
+}
+.grid-slot.status-maintenance .slot-status-stamp {
+    background: #eab308;
+    color: #1a1a1a;
+}
+
+.empty-blueprint-warning {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--blueprint-text);
+    opacity: 0.5;
+    padding: 3rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    gap: 1rem;
+    text-align: center;
+}

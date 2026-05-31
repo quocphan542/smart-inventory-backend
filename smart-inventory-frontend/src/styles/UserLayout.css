@@ -1,0 +1,95 @@
+/* User Layout Styles */
+.user-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.user-layout .sidebar {
+  width: 250px;
+  background-color: #27ae60;
+  color: white;
+  overflow-y: auto;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+}
+
+.user-layout .sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #229954;
+}
+
+.user-layout .sidebar-header h2 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+}
+
+.user-layout .user-info {
+  margin: 0;
+  font-size: 12px;
+  color: #d5f4e6;
+}
+
+.user-layout .sidebar-nav {
+  padding: 20px 0;
+}
+
+.user-layout .nav-group {
+  margin-bottom: 20px;
+}
+
+.user-layout .nav-group h3 {
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 12px;
+  color: #a9dfbf;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.user-layout .nav-group a {
+  display: block;
+  padding: 10px 20px;
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.user-layout .nav-group a:hover {
+  background-color: #229954;
+  padding-left: 30px;
+}
+
+.user-layout .sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  border-top: 1px solid #229954;
+}
+
+.user-layout .logout-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.user-layout .logout-btn:hover {
+  background-color: #c0392b;
+}
+
+.user-layout .main-content {
+  flex: 1;
+  margin-left: 250px;
+  padding: 20px;
+  overflow-y: auto;
+}

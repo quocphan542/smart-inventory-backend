@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # The Database (Optional: remove this if you use an external managed DB like Azure SQL or AWS RDS)
+  # db:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   environment:
+  #     ACCEPT_EULA: "Y"
+  #     MSSQL_SA_PASSWORD: "YourStrong!Passw0rd"
+  #   ports:
+  #     - "1433:1433"
+  #   volumes:
+  #     - sqlserver_data:/var/opt/mssql
+
+  # The Spring Boot Backend
+  backend:
+    # If running locally from source:
+    build: ./smart-inventory-backend
+    # If pulling from GitHub Container Registry after CI/CD:
+    # image: ghcr.io/your-github-username/your-repo/smart-inventory-backend:latest
+    container_name: smart-inventory-backend
+    ports:
+      - "8080:8080"
+    environment:
+      # These variables will override application.properties in Spring Boot
+      # Update with your actual production DB credentials
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://your-db-host:1433;databaseName=SmartInventoryDB;encrypt=true;trustServerCertificate=true;
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=YourStrong!Passw0rd
+    restart: unless-stopped
+    # depends_on:
+    #   - db
+
+  # The React Frontend
+  frontend:
+    # If running locally from source:
+    build: ./smart-inventory-frontend
+    # If pulling from GitHub Container Registry after CI/CD:
+    # image: ghcr.io/your-github-username/your-repo/smart-inventory-frontend:latest
+    container_name: smart-inventory-frontend
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+# volumes:
+#   sqlserver_data:

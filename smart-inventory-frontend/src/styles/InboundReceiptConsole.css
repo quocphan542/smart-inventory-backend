@@ -1,0 +1,317 @@
+:root {
+    --bg-chassis: #e0e5ec;
+    --shadow-light: #ffffff;
+    --shadow-dark: #babecc;
+    --accent-orange: #ff4757;
+    --text-primary: #3d445c;
+    --text-secondary: #828a9a;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --lcd-amber: #f59e0b;
+    --lcd-amber-dim: rgba(245, 158, 11, 0.2);
+    --lcd-bg: #111827;
+}
+
+.inbound-chassis {
+    background-color: var(--bg-chassis);
+    background-image: url('data:image/svg+xml,%3Csvg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23babecc" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M5 0h1L0 6V5zM6 5v1H5z"/%3E%3C/g%3E%3C/svg%3E');
+    padding: 2rem;
+    font-family: var(--font-body);
+    min-height: 100%;
+}
+
+.console-title-stamp {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+
+/* --- Common Mechanical Plates --- */
+.mech-plate {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: var(--bg-chassis);
+    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+    margin-bottom: 2rem;
+}
+
+.plate-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--shadow-dark);
+}
+.plate-icon { color: var(--text-secondary); }
+.plate-title {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+/* Rivets */
+.rivet {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--shadow-light), var(--shadow-dark));
+}
+.rivet:nth-of-type(1) { top: 12px; left: 12px; }
+.rivet:nth-of-type(2) { top: 12px; right: 12px; }
+.rivet:nth-of-type(3) { bottom: 12px; left: 12px; }
+.rivet:nth-of-type(4) { bottom: 12px; right: 12px; }
+
+/* Vents */
+.vents-container {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 4px;
+}
+.vent-slot {
+    width: 6px;
+    height: 18px;
+    border-radius: 3px;
+    background: #caced4;
+    box-shadow: inset 1px 1px 2px var(--shadow-dark), inset -1px -1px 2px var(--shadow-light);
+}
+
+/* --- Form Fields --- */
+.input-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.input-group-recessed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.input-group-recessed label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+.input-group-recessed input,
+.input-group-recessed select,
+.input-group-recessed textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--bg-chassis);
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    outline: none;
+}
+.input-group-recessed input:focus,
+.input-group-recessed select:focus,
+.input-group-recessed textarea:focus {
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light), 0 0 0 2px var(--accent-orange);
+}
+.input-mono {
+    font-family: var(--font-mono) !important;
+    font-weight: 600;
+}
+.read-only-stamp {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--text-secondary);
+    padding: 0.75rem;
+    background: rgba(186, 190, 204, 0.2);
+    border-radius: 8px;
+    box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+}
+
+/* --- Detailed Item Grid --- */
+.detail-table-well {
+    background: var(--bg-chassis);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.item-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+}
+.item-table th {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-align: left;
+    padding: 0.5rem;
+    border-bottom: 2px solid var(--shadow-dark);
+}
+.item-table td {
+    padding: 0.5rem;
+    background: var(--bg-chassis);
+}
+/* Cell Inputs */
+.cell-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background: var(--bg-chassis);
+    box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    outline: none;
+}
+.cell-input:focus {
+    box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light), 0 0 0 1px var(--accent-orange);
+}
+.cell-select {
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+/* LCD Pricing display */
+.lcd-amber {
+    background: var(--lcd-bg);
+    color: var(--lcd-amber);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-shadow: 0 0 3px var(--lcd-amber);
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+.lcd-locked {
+    background: #2d3436;
+    color: #636e72;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.delete-row-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    background: var(--bg-chassis);
+    box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+.delete-row-btn:hover { color: var(--accent-orange); }
+.delete-row-btn:active {
+    box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+    transform: translateY(1px);
+}
+
+/* --- Action Controls --- */
+.action-bay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tactical-btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--bg-chassis);
+    box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.tactical-btn-secondary:hover { color: var(--text-primary); }
+.tactical-btn-secondary:active {
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+    transform: translateY(1px);
+}
+
+.tactical-btn-accent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0 2rem;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: var(--accent-orange);
+    color: var(--shadow-light);
+    box-shadow: 4px 4px 10px #d62535, -4px -4px 10px #ff697b;
+    transition: all 0.1s ease-in-out;
+}
+.tactical-btn-accent:active:not(:disabled) {
+    box-shadow: inset 3px 3px 6px #d62535, inset -3px -3px 6px #ff697b;
+    transform: translateY(2px);
+}
+.tactical-btn-accent:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* --- Telemetry Summary --- */
+.summary-telemetry {
+    background: var(--lcd-bg);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 2rem;
+    border: 2px solid var(--tel-border);
+    box-shadow: inset 4px 4px 8px rgba(0,0,0,0.6);
+}
+.summary-item {
+    display: flex;
+    flex-direction: column;
+}
+.summary-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: #94a3b8;
+    letter-spacing: 1px;
+}
+.summary-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--lcd-amber);
+    text-shadow: 0 0 5px var(--lcd-amber);
+}

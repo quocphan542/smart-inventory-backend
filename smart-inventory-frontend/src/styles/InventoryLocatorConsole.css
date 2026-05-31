@@ -1,0 +1,284 @@
+:root {
+    --bg-chassis: #e0e5ec;
+    --shadow-light: #ffffff;
+    --shadow-dark: #babecc;
+    --accent-orange: #ff4757;
+    --text-primary: #3d445c;
+    --text-secondary: #828a9a;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --lcd-amber: #f59e0b;
+    --lcd-green: #10b981;
+    --lcd-red: #ef4444;
+    --lcd-bg: #111827;
+}
+
+.locator-chassis {
+    background-color: var(--bg-chassis);
+    background-image: url('data:image/svg+xml,%3Csvg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23babecc" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M5 0h1L0 6V5zM6 5v1H5z"/%3E%3C/g%3E%3C/svg%3E');
+    padding: 2rem;
+    font-family: var(--font-body);
+    min-height: 100%;
+}
+
+.console-title-stamp {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+
+/* --- Common Mechanical Plates --- */
+.mech-plate {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: var(--bg-chassis);
+    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+    margin-bottom: 2rem;
+}
+
+.plate-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--shadow-dark);
+}
+.plate-icon { color: var(--text-secondary); }
+.plate-title {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+/* Rivets */
+.rivet {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--shadow-light), var(--shadow-dark));
+}
+.rivet:nth-of-type(1) { top: 12px; left: 12px; }
+.rivet:nth-of-type(2) { top: 12px; right: 12px; }
+.rivet:nth-of-type(3) { bottom: 12px; left: 12px; }
+.rivet:nth-of-type(4) { bottom: 12px; right: 12px; }
+
+/* --- Telemetry Search Bay --- */
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    align-items: end;
+}
+
+.input-group-recessed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.input-group-recessed label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+.input-group-recessed input,
+.input-group-recessed select {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--bg-chassis);
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    outline: none;
+}
+.input-group-recessed input:focus,
+.input-group-recessed select:focus {
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light), 0 0 0 2px var(--accent-orange);
+}
+
+.tactical-btn-accent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    height: 46px; /* Match input height */
+    padding: 0 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: var(--accent-orange);
+    color: var(--shadow-light);
+    box-shadow: 4px 4px 10px #d62535, -4px -4px 10px #ff697b;
+    transition: all 0.1s ease-in-out;
+    white-space: nowrap;
+}
+.tactical-btn-accent:active:not(:disabled) {
+    box-shadow: inset 3px 3px 6px #d62535, inset -3px -3px 6px #ff697b;
+    transform: translateY(2px);
+}
+.tactical-btn-accent:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* --- Locator Matrix Grid --- */
+.matrix-table-well {
+    background: var(--bg-chassis);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    overflow-x: auto;
+}
+
+.matrix-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+}
+.matrix-table th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: left;
+    padding: 0.5rem;
+    border-bottom: 2px solid var(--shadow-dark);
+}
+.matrix-table td {
+    padding: 0.75rem 0.5rem;
+    background: var(--bg-chassis);
+}
+
+/* Data Stamps & Badges */
+.data-stamp {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.badge-sku {
+    display: inline-block;
+    background: #2d3436;
+    color: #f1c40f;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.8);
+}
+.badge-coord {
+    display: inline-block;
+    background: var(--bg-chassis);
+    color: #3b82f6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+}
+
+/* LCD Readouts */
+.lcd-display {
+    background: var(--lcd-bg);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.8);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 80px;
+    justify-content: flex-end;
+}
+.lcd-qty {
+    color: var(--shadow-light);
+    text-shadow: 0 0 3px rgba(255,255,255,0.5);
+}
+.lcd-qty.low-stock {
+    color: var(--accent-orange);
+    text-shadow: 0 0 5px var(--accent-orange);
+    animation: pulse-red 2s infinite;
+}
+.lcd-val {
+    color: var(--lcd-green);
+    text-shadow: 0 0 5px var(--lcd-green);
+}
+.lcd-locked {
+    background: #2d3436;
+    color: #636e72;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.5);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Status Indicators */
+.expiry-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.led-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.led-dot.safe { background: var(--lcd-green); box-shadow: 0 0 5px var(--lcd-green); }
+.led-dot.warn { background: var(--lcd-amber); box-shadow: 0 0 5px var(--lcd-amber); animation: pulse-yellow 2s infinite;}
+.led-dot.danger { background: var(--accent-orange); box-shadow: 0 0 5px var(--accent-orange); animation: pulse-red 1s infinite;}
+
+@keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes pulse-yellow { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* Summary Telemetry */
+.summary-telemetry {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--shadow-dark);
+}
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.summary-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+.summary-value-lcd {
+    background: var(--lcd-bg);
+    color: var(--lcd-green);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-shadow: 0 0 5px var(--lcd-green);
+    box-shadow: inset 4px 4px 8px rgba(0,0,0,0.6);
+    border: 2px solid #374151;
+    margin-top: 0.25rem;
+}

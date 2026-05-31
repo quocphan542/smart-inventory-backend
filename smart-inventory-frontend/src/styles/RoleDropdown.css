@@ -1,0 +1,105 @@
+.role-dropdown-container {
+    position: relative;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 120px;
+    max-width: 180px;
+    /* Tăng padding để nút to hơn, đồng bộ với các nút khác */
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: var(--bg-chassis);
+    box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+    transition: all 0.2s ease-in-out;
+}
+
+.dropdown-trigger:active {
+    box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+    transform: translateY(1px);
+}
+
+.role-tag-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Tăng padding để tag to hơn */
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    /* Tăng font-size để chữ rõ hơn */
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-grow: 1;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.role-tag-display.admin {
+    background-color: #2d3436;
+    color: var(--accent-orange);
+}
+
+.role-tag-display.thukho {
+    background-color: #065f46;
+    color: #a7f3d0;
+}
+
+.role-tag-display.customer {
+    background-color: #3730a3;
+    color: #c7d2fe;
+}
+
+.chevron {
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    /* Tăng kích thước icon chevron */
+    width: 20px;
+    height: 20px;
+}
+.chevron.open {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: var(--dropdown-trigger-width, 100%);
+    background: var(--bg-chassis);
+    border-radius: 8px;
+    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+    padding: 0.5rem;
+    z-index: 10;
+}
+
+.dropdown-item {
+    /* Tăng padding để item to hơn */
+    padding: 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    /* Tăng font-size để chữ rõ hơn */
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-item:hover {
+    background: var(--bg-chassis);
+    color: var(--accent-orange);
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+}

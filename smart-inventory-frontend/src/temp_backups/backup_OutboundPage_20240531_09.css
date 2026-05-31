@@ -1,0 +1,210 @@
+/* === Design System: Industrial Skeuomorphism - Outbound Page === */
+/* File: src/styles/OutboundPage.css */
+
+:root {
+    /* 1. Design Tokens */
+    --bg-chassis: #e0e5ec;
+    --text-primary: #2d3436;
+    --text-muted: #4a5568;
+    --accent-green: #22c55e;
+    --accent-orange: #ff4757;
+    --accent-amber: #f59e0b;
+    --lcd-screen-bg: #1a1c1e;
+    --border-shadow: #babecc;
+    --border-highlight: #ffffff;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+
+    /* 2. Neumorphic Shadows */
+    --shadow-card: 10px 10px 20px var(--border-shadow), -10px -10px 20px var(--border-highlight);
+    --shadow-recessed: inset 6px 6px 12px var(--border-shadow), inset -6px -6px 12px var(--border-highlight);
+    --shadow-pressed: inset 8px 8px 16px var(--border-shadow), inset -8px -8px 16px var(--border-highlight);
+}
+
+/* --- Base Layout & Ambiance --- */
+.outbound-page-chassis {
+    background-color: var(--bg-chassis);
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    padding: 1.5rem;
+    min-height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDI1Ii8+PC9zdmc+');
+}
+
+.page-title-stamp {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-shadow: 0 1px 0 var(--border-highlight);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* --- Order Input Well --- */
+.order-input-well {
+    background: var(--bg-chassis);
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--shadow-recessed);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+.order-input-well:focus { outline: none; color: var(--text-primary); }
+
+/* --- Main Content Grid (Responsive) --- */
+.outbound-main-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile-first */
+    gap: 2rem;
+}
+@media (min-width: 1024px) {
+    .outbound-main-grid {
+        grid-template-columns: 2fr 1fr; /* 2/3 for Picking List, 1/3 for Scanner/Summary */
+    }
+}
+
+/* --- Picking List Display --- */
+.picking-list-screen {
+    background: var(--lcd-screen-bg);
+    box-shadow: var(--shadow-recessed);
+    border-radius: 16px;
+    padding: 1.5rem;
+    min-height: 400px;
+    overflow-y: auto;
+}
+.picking-list-title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 5px var(--accent-green);
+}
+.task-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+}
+.task-status-led {
+    grid-row: 1 / span 2;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 4px;
+}
+.task-status-led.pending { background: var(--accent-amber); box-shadow: 0 0 8px var(--accent-amber); }
+.task-status-led.picked { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+
+.task-product-name {
+    grid-column: 2;
+    font-weight: 600;
+    color: #e5e7eb;
+}
+.task-details {
+    grid-column: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.task-location {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-green);
+}
+.task-quantity {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #e5e7eb;
+}
+
+/* --- Right Column --- */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- Confirmation Scanner --- */
+.confirmation-scanner-bay {
+    background: var(--bg-chassis);
+    box-shadow: var(--shadow-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+.scanner-label {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.scanner-well {
+    background: var(--bg-chassis);
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--shadow-recessed);
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+}
+.scanner-well:focus { outline: none; }
+
+/* --- Dispatch Summary --- */
+.dispatch-summary-panel {
+    background: var(--bg-chassis);
+    box-shadow: var(--shadow-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+.summary-label {
+    font-weight: 600;
+    color: var(--text-muted);
+}
+.summary-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* --- Finalize Button --- */
+.btn-complete-dispatch {
+    border: none;
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    background: var(--accent-green);
+    color: white;
+    box-shadow: 10px 10px 20px #1a984a, -10px -10px 20px #28f26c;
+    transition: all 100ms ease-in-out;
+}
+.btn-complete-dispatch:active {
+    box-shadow: inset 6px 6px 12px #1a984a, inset -6px -6px 12px #28f26c;
+    transform: translateY(4px);
+}

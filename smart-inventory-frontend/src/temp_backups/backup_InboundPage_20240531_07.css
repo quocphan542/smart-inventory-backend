@@ -1,0 +1,245 @@
+/* === Design System: Industrial Skeuomorphism - Inbound Page === */
+/* File: src/styles/InboundPage.css */
+
+:root {
+    /* 1. Design Tokens: Colors */
+    --bg-chassis: #e0e5ec;
+    --text-primary: #2d3436;
+    --text-muted: #4a5568;
+    --accent-green: #22c55e;
+    --accent-orange: #ff4757;
+    --border-shadow: #babecc;
+    --border-highlight: #ffffff;
+
+    /* 2. Design Tokens: Typography */
+    --font-sans: 'Inter', 'Segoe UI', 'Roboto', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+
+    /* 3. Design Tokens: Shadows */
+    --shadow-card: 10px 10px 20px var(--border-shadow), -10px -10px 20px var(--border-highlight);
+    --shadow-recessed: inset 6px 6px 12px var(--border-shadow), inset -6px -6px 12px var(--border-highlight);
+    --shadow-pressed: inset 8px 8px 16px var(--border-shadow), inset -8px -8px 16px var(--border-highlight);
+}
+
+/* --- Base Layout & Ambiance --- */
+.inbound-page-chassis {
+    background-color: var(--bg-chassis);
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    padding: 1.5rem;
+    min-height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDI1Ii8+PC9zdmc+');
+}
+
+.page-title-stamp {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-shadow: 0 1px 0 var(--border-highlight);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* --- Scanner Bay --- */
+.scanner-bay {
+    margin-bottom: 2rem;
+}
+
+.scanner-input-well {
+    background: var(--bg-chassis);
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--shadow-recessed);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    transition: all 0.2s ease-in-out;
+}
+.scanner-input-well:focus {
+    outline: none;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-recessed), 0 0 10px 4px rgba(34, 197, 94, 0.5);
+}
+
+/* --- Main Content Grid (Responsive) --- */
+.inbound-main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+@media (min-width: 1024px) {
+    .inbound-main-grid {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+/* --- Product ID & Data Entry --- */
+.product-data-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.product-id-card {
+    background: var(--bg-chassis);
+    box-shadow: var(--shadow-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+}
+.product-image-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--bg-muted);
+    border-radius: 8px;
+    box-shadow: var(--shadow-recessed);
+    margin-bottom: 1rem;
+}
+.product-name { font-weight: 600; font-size: 1.25rem; }
+.product-sku {
+    font-family: var(--font-mono);
+    font-size: 2rem; /* MASSIVE SKU */
+    font-weight: 800;
+    color: var(--accent-orange);
+    margin-top: 0.5rem;
+}
+
+.data-entry-module {
+    background: var(--bg-chassis);
+    box-shadow: var(--shadow-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.data-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.data-label {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+.data-input-well {
+    background: var(--bg-chassis);
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--shadow-recessed);
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+}
+.data-input-well:focus { outline: none; }
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.quantity-display {
+    flex-grow: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 3rem; /* MASSIVE Quantity */
+    font-weight: 800;
+}
+
+/* --- Heavy Duty Buttons --- */
+.heavy-duty-btn {
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    transition: all 100ms ease-in-out;
+}
+.heavy-duty-btn:active {
+    box-shadow: var(--shadow-pressed);
+    transform: translateY(4px);
+}
+.btn-adjust {
+    background: var(--bg-chassis);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    padding: 0.5rem 1.5rem;
+}
+.btn-finalize {
+    background: var(--accent-orange);
+    color: white;
+}
+
+/* --- Inbound Receipt List --- */
+.receipt-list-panel {
+    background: var(--bg-chassis);
+    box-shadow: var(--shadow-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.receipt-list-container {
+    flex-grow: 1;
+    background: var(--bg-muted);
+    box-shadow: var(--shadow-recessed);
+    border-radius: 8px;
+    padding: 0.5rem;
+    overflow-y: auto;
+    min-height: 300px;
+}
+.receipt-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+.receipt-item:not(:last-child) {
+    border-bottom: 2px solid var(--bg-chassis);
+}
+.receipt-item span {
+    font-size: 1rem;
+}
+.receipt-item .qty {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.btn-remove {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+.btn-remove:hover {
+    color: var(--accent-orange);
+}
+
+.receipt-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--bg-muted);
+}
+.btn-complete {
+    width: 100%;
+    background: var(--accent-green);
+    color: white;
+}

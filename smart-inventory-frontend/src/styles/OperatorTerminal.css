@@ -1,0 +1,196 @@
+/* === "Holographic Glass" Operator Terminal Styles === */
+
+:root {
+    --bg-space: #0d0c1d;
+    --glass-bg: rgba(20, 20, 40, 0.4);
+    --glass-border: rgba(137, 78, 255, 0.3);
+    --glow-primary: #894eff;
+    --glow-secondary: #00f6ff;
+    --text-primary-glow: #f0f2f5;
+    --text-secondary-glow: #a7a9be;
+    --font-ui: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* --- The Ambiance --- */
+@keyframes space-particles {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-1000px); }
+}
+
+.terminal-container {
+    background-color: var(--bg-space);
+    color: var(--text-primary-glow);
+    font-family: var(--font-ui);
+    padding: 2rem;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.terminal-container::before { /* Aurora Glow */
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(137, 78, 255, 0.2), transparent 40%);
+    animation: rotate 20s linear infinite;
+}
+@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* --- The Glass Panels --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Quick Stats Area --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(137, 78, 255, 0.1);
+}
+
+.stat-card-title {
+    font-size: 0.9rem;
+    color: var(--text-secondary-glow);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-card-value {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-primary-glow);
+    text-shadow: 0 0 8px rgba(240, 242, 245, 0.5);
+}
+
+/* --- Main Grid (Actions & Logs) --- */
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+/* --- Action Panels --- */
+.action-panels-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.action-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    position: relative;
+}
+
+.action-panel::before { /* Hover Pulse Effect */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.action-panel:hover::before {
+    border-color: var(--glow-secondary);
+    animation: pulse-border 1.5s infinite;
+}
+@keyframes pulse-border {
+    0% { border-color: var(--glow-secondary); }
+    50% { border-color: rgba(0, 246, 255, 0.3); }
+    100% { border-color: var(--glow-secondary); }
+}
+
+.action-panel-icon {
+    margin-bottom: 1rem;
+    color: var(--glow-secondary);
+    filter: drop-shadow(0 0 5px var(--glow-secondary));
+}
+
+.action-panel-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.action-panel-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary-glow);
+    max-width: 80%;
+}
+
+/* --- Activity Log --- */
+.activity-log-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--glow-primary);
+}
+
+.log-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.log-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--glass-border);
+    animation: fade-in 0.5s ease forwards;
+}
+@keyframes fade-in { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+
+.log-item-icon {
+    flex-shrink: 0;
+}
+.log-item-icon.inbound { color: var(--glow-secondary); }
+.log-item-icon.outbound { color: var(--accent-orange); }
+.log-item-icon.alert { color: #facc15; }
+
+.log-item-content p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+.log-item-content span {
+    font-size: 0.75rem;
+    color: var(--text-secondary-glow);
+}
